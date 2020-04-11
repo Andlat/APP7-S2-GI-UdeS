@@ -2,6 +2,7 @@
 #include "PayoutTable.h"
 
 #include <QGridLayout>
+#include <QPushButton>
 
 
 Window::Window(){
@@ -9,10 +10,18 @@ Window::Window(){
 	auto centralWidget = new QWidget;
 
 	centralWidget->setLayout(mainLayout);
-	mainLayout->addWidget(new PayoutTable);
+
+
+	auto payoutTable = new PayoutTable;
+	mainLayout->addWidget(payoutTable);
 
 	setCentralWidget(centralWidget);
 	setMinimumSize(500, 500);
+
+	//Bouton temporaire pour changer le montant surligné
+	auto nextBtn = new QPushButton("Next", this);
+	connect(nextBtn, &QPushButton::clicked, payoutTable, &PayoutTable::next);
+	mainLayout->addWidget(nextBtn);
 }
 
 Window::~Window(){
