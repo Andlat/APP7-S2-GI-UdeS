@@ -10,6 +10,7 @@ PayoutTable::PayoutTable() {
 		
 		auto label = new QLabel(QString::number(amounts[i]) + " $", this);
 		label->setAlignment(Qt::AlignRight);
+		label->setFont(QFont("Arial", 12));
 
 		layout->addWidget(label);
 
