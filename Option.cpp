@@ -1,4 +1,4 @@
-#include "Choice.h"
+#include "Option.h"
 
 
 
@@ -15,7 +15,7 @@ Option::Option(QString q, QWidget* parent)
 	this->setCursor(Qt::PointingHandCursor);
 
 	//Emettre le signal selected quand le choix est clique/selectionne
-	connect(this, &QPushButton::clicked, this, [this](){emit selected();});
+	connect(this, &QPushButton::clicked, this, [this](){emit selected(this);});
 }
 
 
@@ -31,4 +31,14 @@ void Option::set(QString c)
 QString Option::get()
 {
 	return this->option;
+}
+
+bool Option::operator==(Option op)
+{
+	return this->option == op.option;
+}
+
+bool Option::operator==(Option * op)
+{
+	return this->option == op->option;
 }

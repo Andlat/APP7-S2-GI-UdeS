@@ -1,7 +1,7 @@
 #include "Window.h"
 #include "PayoutTable.h"
 #include "Question.h"
-#include "Choice.h"
+#include "Option.h"
 #include "Timer.h"
 
 #include <QGridLayout>
@@ -9,7 +9,7 @@
 #include <QMenu>
 #include <QMenuBar>
 
-
+#include <iostream>
 
 Window::Window(){
 	auto mainLayout = new QGridLayout;
@@ -33,12 +33,25 @@ Window::Window(){
 	auto question = new Question("Quel programme universitaire est le meilleur ?", this);
 	mainLayout->addWidget(question, 1, 1);
 
+	auto correctOption = new Option("A) Genie informatique", this);
 	question->setOptions(
-		new Option("A) Genie informatique", this),
+		correctOption,
 		new Option("O) Genie robotique", this),
 		new Option("U) Genie electrique", this),
 		new Option("E) Administration", this)
 		);
+	question->setAnswer(correctOption);
+	question->ConnectOptions([question](Option* selected) {
+		
+		QMessageBox msg;
+
+		if (question->Verify(selected))
+			msg.setText("Bonne reponse !!!");
+		else
+			msg.setText("Mauvaise reponse...");
+
+		msg.exec();
+	});
 
 	//Layout des choix de reponse
 	auto choicesContainer = new QWidget;
