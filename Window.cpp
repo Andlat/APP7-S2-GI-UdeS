@@ -2,6 +2,7 @@
 #include "PayoutTable.h"
 #include "Question.h"
 #include "Choice.h"
+#include "Timer.h"
 
 #include <QGridLayout>
 #include <QPushButton>
@@ -48,6 +49,10 @@ Window::Window(){
 	choicesLayout->addWidget(question->Options()[1], 1, 0);
 	choicesLayout->addWidget(question->Options()[2], 0, 1);
 	choicesLayout->addWidget(question->Options()[3], 1, 1);
+
+	//Timer
+	auto timer = new Timer(this);
+	mainLayout->addWidget(timer->start(), 3, 0);
 
 	//Table des montants
 	auto payoutTable = new PayoutTable;

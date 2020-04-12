@@ -36,6 +36,9 @@
     <ClCompile Include="Question.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -53,6 +56,9 @@
     <ClInclude Include="Question.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="Timer.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="Window.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -68,6 +74,12 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_PayoutTable.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_Timer.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_Timer.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="debug\moc_Window.cpp">
