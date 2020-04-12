@@ -1,5 +1,5 @@
 #include "Timer.h"
-#include <iostream>
+#include <QMessageBox>
 
 
 Timer::Timer(QWidget* parent, unsigned t)
@@ -18,11 +18,6 @@ Timer * Timer::start()
 {
 	looper->start(1000);
 	return this;
-}
-
-void Timer::stop()
-{
-	looper->setSingleShot(true);
 }
 
 void Timer::reset()
@@ -45,8 +40,21 @@ unsigned Timer::left()
 	return this->time_left;
 }
 
+void Timer::isExpired()
+{
+	if (time_left == 0) {
+		looper->stop();
+
+		QMessageBox msg;
+		msg.setText("Temps ecoule. Vous avez perdu...\n:'(");
+		msg.exec();
+	}
+}
+
 void Timer::update()
 {
 	--time_left;
 	this->setText(QString::number(time_left) + " s");
+
+	isExpired();
 }

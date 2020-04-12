@@ -67,7 +67,7 @@ Window::Window(){
 	choicesLayout->addWidget(question->Options()[3], 1, 1);
 
 	//Timer
-	auto timer = new Timer(this);
+	auto timer = new Timer(this,30);
 	mainLayout->addWidget(timer->start(), 3, 0);
 
 	//Table des montants
