@@ -2,6 +2,7 @@
 #define WINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 
 class Window: public QMainWindow
 {
@@ -16,6 +17,15 @@ protected:
 #ifndef QT_NO_CONTEXTMENU
 	void contextMenuEvent(QContextMenuEvent *event) override;
 #endif /* QT_NO_CONTEXTMENU */
+
+private slots:
+	void quit();
+	void save();
+	void help();
+
+private:
+	void messageBox(QString s);
+	QMessageBox message;
 
 };
 

@@ -5,6 +5,9 @@
 
 #include <QGridLayout>
 #include <QPushButton>
+#include <QMenu>
+#include <QMenuBar>
+
 
 
 Window::Window(){
@@ -53,11 +56,52 @@ Window::Window(){
 	auto payoutTable = new PayoutTable;
 	mainLayout->addWidget(payoutTable,1,2,2,1);
 
+
 	//Bouton temporaire pour changer le montant surligné
 	auto nextBtn = new QPushButton("Next", this);
 	connect(nextBtn, &QPushButton::clicked, payoutTable, &PayoutTable::next);
 	mainLayout->addWidget(nextBtn,3,2);
+
+	//bouton pour choisir de partir
+	auto stopGame = new QPushButton("parir", this);
+	connect(stopGame, &QPushButton::clicked, this, &Window::quit);
+	mainLayout->addWidget(stopGame, 3, 1);
+	
+	// gestion du menu des actions du menu
+	auto save_ac = new QAction("sauvegarde");
+	connect(save_ac, &QAction::triggered, this, &Window::save);
+	auto help_ac = new QAction("aide");
+	connect(help_ac, &QAction::triggered, this, &Window::help);
+
+	//section du menu
+	auto menu = new QMenu;
+	menu = menuBar()->addMenu("Fichier");
+	menu->addAction(save_ac);
+	menu = menuBar()->addMenu("Edition");
+	menu->addAction(help_ac);
+
 }
 
 Window::~Window(){
+}
+
+void Window::quit()
+{
+	messageBox("quitter la partie");
+}
+
+void Window::save()
+{
+	messageBox("Sauvegarde du score");
+}
+
+void Window::help()
+{
+	messageBox("Explication du jeu");
+}
+
+void Window::messageBox(QString s)
+{
+	message.setText(s);
+	message.exec();
 }
