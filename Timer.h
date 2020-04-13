@@ -13,7 +13,6 @@ public:
 	~Timer();
 
 	Timer* start();
-	void stop();
 
 	void reset();
 
@@ -25,6 +24,8 @@ private slots:
 	void update();
 
 private:
+	void isExpired();
+
 	QTimer* looper;
 	unsigned time_left;
 	const unsigned init_t;

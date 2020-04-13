@@ -1,15 +1,21 @@
 #include "Window.h"
 #include "PayoutTable.h"
 #include "Question.h"
-#include "Choice.h"
+#include "Option.h"
 #include "Timer.h"
 
 #include <QGridLayout>
 #include <QPushButton>
 #include <QMenu>
 #include <QMenuBar>
+<<<<<<< HEAD
+#include <QFile>
+#include <QTextStream>
 
+=======
 
+#include <iostream>
+>>>>>>> fd556d7d58014bf421f0b550537b31712e2b00b6
 
 Window::Window(){
 	auto mainLayout = new QGridLayout;
@@ -32,13 +38,35 @@ Window::Window(){
 	//Question
 	auto question = new Question("Quel programme universitaire est le meilleur ?", this);
 	mainLayout->addWidget(question, 1, 1);
+<<<<<<< HEAD
+	
+	
+=======
 
+	auto correctOption = new Option("A) Genie informatique", this);
+>>>>>>> fd556d7d58014bf421f0b550537b31712e2b00b6
 	question->setOptions(
-		new Option("A) Genie informatique", this),
+		correctOption,
 		new Option("O) Genie robotique", this),
 		new Option("U) Genie electrique", this),
 		new Option("E) Administration", this)
 		);
+<<<<<<< HEAD
+	
+=======
+	question->setAnswer(correctOption);
+	question->ConnectOptions([question](Option* selected) {
+		
+		QMessageBox msg;
+
+		if (question->Verify(selected))
+			msg.setText("Bonne reponse !!!");
+		else
+			msg.setText("Mauvaise reponse...");
+
+		msg.exec();
+	});
+>>>>>>> fd556d7d58014bf421f0b550537b31712e2b00b6
 
 	//Layout des choix de reponse
 	auto choicesContainer = new QWidget;
@@ -54,7 +82,7 @@ Window::Window(){
 	choicesLayout->addWidget(question->Options()[3], 1, 1);
 
 	//Timer
-	auto timer = new Timer(this);
+	auto timer = new Timer(this,30);
 	mainLayout->addWidget(timer->start(), 3, 0);
 
 	//Table des montants
@@ -93,16 +121,31 @@ Window::~Window(){
 void Window::quit()
 {
 	messageBox("quitter la partie");
+	save();
+	this->close();
 }
 
 void Window::save()
 {
-	messageBox("Sauvegarde du score");
+	messageBox("votre score a ete sauvegarder dans score.txt");
+	QFile file("score.text");
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+		return;
+	QTextStream out(&file);
+	out << "votre score est de : " << endl;
 }
 
 void Window::help()
 {
-	messageBox("Explication du jeu");
+	QString text;
+	text = ("Ce jeu consiste a remporter de l'argent a chaque fois que vous trouvez la bonne reponse aux questions. Pour vous aidez,"
+		"vous disposez de 4 outils soit : le 50/50; le telephone; l'avie du public et le joker. Leur fonctionnement sont expliques ci-dessous"
+		"Le 50/50 permet d'eliminer 2 reponses sur les 4. La reponse de la question se trouve dans l'une de ces 2 reponses"
+		"Le telephone vous donne la possibilité d'appeler un ami qui pourra vous aider a repondre à la question"
+		"L'aide du public vous permet de consulter le public et d'avoir leur opinion sur reponse"
+		"Le joker vous donne directement la bonne reponse "
+		"Bonne chance :) ");
+	messageBox(text);
 }
 
 void Window::messageBox(QString s)

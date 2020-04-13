@@ -27,7 +27,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Choice.cpp">
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PayoutTable.cpp">
@@ -47,7 +50,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Choice.h">
+    <CustomBuild Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Option.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="PayoutTable.h">
@@ -64,10 +70,16 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="debug\moc_Choice.cpp">
+    <ClCompile Include="debug\moc_Menu.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="release\moc_Choice.cpp">
+    <ClCompile Include="release\moc_Menu.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_Option.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_Option.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="debug\moc_PayoutTable.cpp">

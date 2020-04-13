@@ -15,8 +15,11 @@ public:
 	void set(QString c);
 	QString get();
 
+	bool operator==(Option op);
+	bool operator==(Option* op);
+
 signals:
-	void selected();
+	void selected(Option*);
 
 private:
 	QString option;
