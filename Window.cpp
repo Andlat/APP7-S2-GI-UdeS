@@ -8,14 +8,8 @@
 #include <QPushButton>
 #include <QMenu>
 #include <QMenuBar>
-<<<<<<< HEAD
 #include <QFile>
 #include <QTextStream>
-
-=======
-
-#include <iostream>
->>>>>>> fd556d7d58014bf421f0b550537b31712e2b00b6
 
 Window::Window(){
 	auto mainLayout = new QGridLayout;
@@ -38,22 +32,16 @@ Window::Window(){
 	//Question
 	auto question = new Question("Quel programme universitaire est le meilleur ?", this);
 	mainLayout->addWidget(question, 1, 1);
-<<<<<<< HEAD
-	
-	
-=======
 
 	auto correctOption = new Option("A) Genie informatique", this);
->>>>>>> fd556d7d58014bf421f0b550537b31712e2b00b6
+
 	question->setOptions(
 		correctOption,
 		new Option("O) Genie robotique", this),
 		new Option("U) Genie electrique", this),
 		new Option("E) Administration", this)
 		);
-<<<<<<< HEAD
-	
-=======
+
 	question->setAnswer(correctOption);
 	question->ConnectOptions([question](Option* selected) {
 		
@@ -66,7 +54,6 @@ Window::Window(){
 
 		msg.exec();
 	});
->>>>>>> fd556d7d58014bf421f0b550537b31712e2b00b6
 
 	//Layout des choix de reponse
 	auto choicesContainer = new QWidget;

@@ -54,12 +54,9 @@ void Question::setOptions(Option * options[4])
 
 void Question::setOptions(Option * o1, Option * o2, Option * o3, Option * o4)
 {
-<<<<<<< HEAD
-	
-=======
+
 	deleteCurrentOptions();
 
->>>>>>> fd556d7d58014bf421f0b550537b31712e2b00b6
 	this->options[0] = o1;
 	this->options[1] = o2;
 	this->options[2] = o3;
