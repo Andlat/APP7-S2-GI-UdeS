@@ -349,3 +349,5 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 .qmake.stash
+APP7.vcxproj
+APP7.vcxproj.filters
