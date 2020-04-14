@@ -94,9 +94,9 @@ Window::Window(){
 	mainLayout->addWidget(stopGame, 3, 1);
 	
 	// gestion du menu des actions du menu
-	auto save_ac = new QAction("sauvegarde");
+	auto save_ac = new QAction("Sauvegarder");
 	connect(save_ac, &QAction::triggered, this, &Window::save);
-	auto help_ac = new QAction("aide");
+	auto help_ac = new QAction("Aide");
 	connect(help_ac, &QAction::triggered, this, &Window::help);
 
 	//section du menu
@@ -143,19 +143,19 @@ Window::~Window(){
 
 void Window::quit()
 {
-	messageBox("quitter la partie");
+	messageBox("Quitter la partie");
 	save();
 	this->close();
 }
 
 void Window::save()
 {
-	messageBox("votre score a ete sauvegarder dans score.txt");
+	messageBox("Votre score a ete sauvegarder dans score.txt");
 	QFile file("score.txt");
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		return;
 	QTextStream out(&file);
-	out << "votre score est de : " << this->payoutTable->get() << '$' << endl;
+	out << "Votre score est de : " << this->payoutTable->get() << '$' << endl;
 }
 
 void Window::help()
@@ -178,12 +178,12 @@ void Window::cinquante()
 
 void Window::telephone()
 {
-	messageBox("coup de telephone");
+	messageBox("Coup de telephone");
 }
 
 void Window::publics()
 {
-	messageBox("adie du public");
+	messageBox("Aide du public");
 }
 
 void Window::messageBox(QString s)
