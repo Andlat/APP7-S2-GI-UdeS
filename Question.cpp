@@ -25,7 +25,7 @@ Question::~Question()
 				haveToDeleteAnswer = false;
 
 			delete options[i];
-			options[i] == nullptr;
+			options[i] = nullptr;
 		}
 	}
 	
