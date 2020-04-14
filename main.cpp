@@ -1,5 +1,6 @@
 #include <QApplication>
 #include "Window.h"
+#include "Parametre.h"
 
 int main(int argc, char* argv[]){
 	QApplication app(argc, argv);

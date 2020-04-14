@@ -3,6 +3,7 @@
 #include "Question.h"
 #include "Option.h"
 #include "Timer.h"
+#include "Parametre.h"
 
 #include <QGridLayout>
 #include <QPushButton>
@@ -16,7 +17,7 @@
 
 Window::Window(){
 	auto mainLayout = new QGridLayout;
-	auto centralWidget = new QWidget;
+	auto centralWidget = new QWidget(this);
 	//this->setStyleSheet("border:1px solid black"); /* TODO ceci est temporaire pour mieux voir le layout */
 
 	centralWidget->setLayout(mainLayout);
@@ -89,15 +90,17 @@ Window::Window(){
 	mainLayout->addWidget(nextBtn,3,2);
 
 	//bouton pour choisir de partir
-	auto stopGame = new QPushButton("Parir", this);
+	auto stopGame = new QPushButton("Partir", this);
 	connect(stopGame, &QPushButton::clicked, this, &Window::quit);
 	mainLayout->addWidget(stopGame, 3, 1);
 	
 	// gestion du menu des actions du menu
-	auto save_ac = new QAction("sauvegarde");
+	auto save_ac = new QAction("Sauvegarde");
 	connect(save_ac, &QAction::triggered, this, &Window::save);
-	auto help_ac = new QAction("aide");
+	auto help_ac = new QAction("Aide");
 	connect(help_ac, &QAction::triggered, this, &Window::help);
+	auto param_ac = new QAction("Parametres");
+	connect(param_ac, &QAction::triggered, this, &Window::parametre);
 
 	//section du menu
 	auto menu = new QMenu;
@@ -105,6 +108,7 @@ Window::Window(){
 	menu->addAction(save_ac);
 	menu = menuBar()->addMenu("Edition");
 	menu->addAction(help_ac);
+	menu->addAction(param_ac);
 
 	/* image pour le 50/50 , telephone, public, image de background */
 	
@@ -147,7 +151,7 @@ void Window::quit()
 void Window::save()
 {
 	messageBox("votre score a ete sauvegarder dans score.txt");
-	QFile file("score.text");
+	QFile file("score.txt");
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		return;
 	QTextStream out(&file);
@@ -158,7 +162,7 @@ void Window::help()
 {
 	QString text;
 	text = ("Ce jeu consiste a remporter de l'argent a chaque fois que vous trouvez la bonne reponse aux questions. Pour vous aidez,"
-		"vous disposez de 4 outils soit : le 50/50; le telephone; l'avie du public et le joker. Leur fonctionnement sont expliques ci-dessous"
+		"vous disposez de 4 outils soit : le 50/50; le telephone; l'avis du public et le joker. Leur fonctionnement sont expliques ci-dessous"
 		"Le 50/50 permet d'eliminer 2 reponses sur les 4. La reponse de la question se trouve dans l'une de ces 2 reponses"
 		"Le telephone vous donne la possibilité d'appeler un ami qui pourra vous aider a repondre à la question"
 		"L'aide du public vous permet de consulter le public et d'avoir leur opinion sur reponse"
@@ -169,7 +173,7 @@ void Window::help()
 
 void Window::cinquante()
 {
-	messageBox("50/50 selectionner");
+	messageBox("50/50 selectionné");
 }
 
 void Window::telephone()
@@ -179,11 +183,17 @@ void Window::telephone()
 
 void Window::publics()
 {
-	messageBox("adie du public");
+	messageBox("aide du public");
 }
 
 void Window::messageBox(QString s)
 {
 	message.setText(s);
 	message.exec();
+}
+
+void Window::parametre()
+{
+	Parametre param;
+	param.exec();
 }

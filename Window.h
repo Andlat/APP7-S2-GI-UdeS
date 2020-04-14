@@ -25,6 +25,7 @@ private slots:
 	void cinquante();
 	void telephone();
 	void publics();
+	void parametre();
 
 private:
 	void messageBox(QString s);
