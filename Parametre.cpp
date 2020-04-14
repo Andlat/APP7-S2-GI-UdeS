@@ -24,6 +24,7 @@ void Parametre::buildDialog(Param param)
 	mainLayout->addWidget(_mainWidget);
 	resize(800, 600);
 	setWindowTitle("Parametres");
+	setWindowIcon(QIcon("logo"));
 
 	_difficulty = new QComboBox(_mainWidget);
 

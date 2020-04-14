@@ -44,8 +44,8 @@ private slots:
 	void updateParam(Param param);
 
 private:
-	void messageBox(QString s);
-	QMessageBox message;
+	void messageBox(QString s, QString winTitle = "Qui veut gagner des millions ?");
+	QMessageBox* message;
 
 	QWidget* choicesContainer;
 	Question* question;
