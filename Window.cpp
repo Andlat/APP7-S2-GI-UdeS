@@ -24,6 +24,8 @@ Window::Window(){
 	setWindowTitle("Qui veut gagner des millions ?");
 	setWindowIcon(QIcon("logo"));
 
+	this->message = new QMessageBox(this);
+
 	//Titre
 	auto title = new QLabel("Qui veut gagner des millions ?", this);
 	title->setAlignment(Qt::AlignCenter);
@@ -177,7 +179,7 @@ void Window::help()
 		"L'aide du public vous permet de consulter le public et d'avoir leur opinion sur reponse"
 		"Le joker vous donne directement la bonne reponse "
 		"Bonne chance :) ");
-	messageBox(text);
+	messageBox(text, "Aide");
 }
 
 void Window::cinquante()
@@ -195,10 +197,11 @@ void Window::publics()
 	messageBox("Aide du public");
 }
 
-void Window::messageBox(QString s)
+void Window::messageBox(QString s, QString winTitle)
 {
-	message.setText(s);
-	message.exec();
+	message->setText(s);
+	message->setWindowTitle(winTitle);
+	message->exec();
 }
 
 void Window::parametre()

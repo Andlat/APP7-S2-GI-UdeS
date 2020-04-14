@@ -31,8 +31,8 @@ private slots:
 	void parametre();
 
 private:
-	void messageBox(QString s);
-	QMessageBox message;
+	void messageBox(QString s, QString winTitle = "Qui veut gagner des millions ?");
+	QMessageBox* message;
 
 	PayoutTable* payoutTable;
 	Timer* timer;
