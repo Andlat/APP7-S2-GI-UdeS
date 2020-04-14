@@ -21,6 +21,9 @@ public:
 	void operator+=(int t);
 	unsigned left();
 
+	unsigned init_t();
+	void setInit_t(unsigned init_t);
+
 private slots:
 	void update();
 
@@ -29,7 +32,7 @@ private:
 
 	QTimer* looper;
 	unsigned time_left;
-	const unsigned init_t;
+	unsigned _init_t;
 };
 
 #endif /* TIMER_H */

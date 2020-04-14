@@ -3,7 +3,7 @@
 
 
 Timer::Timer(QWidget* parent, unsigned t)
-	:init_t(t), time_left(t), QLabel(QString::number(t)+" s", parent)
+	:_init_t(t), time_left(t), QLabel(QString::number(t)+" s", parent)
 {
 	this->setFont(QFont("Arial", 24));
 	looper = new QTimer(parent);
@@ -29,7 +29,7 @@ Timer* Timer::stop()
 
 Timer* Timer::reset()
 {
-	time_left = init_t+1;//+1s since the update removes 1s
+	time_left = _init_t+1;//+1s since the update removes 1s
 	this->update();
 
 	return this;
@@ -67,4 +67,14 @@ void Timer::update()
 	this->setText(QString::number(time_left) + " s");
 
 	isExpired();
+}
+
+unsigned Timer::init_t()
+{
+	return _init_t;
+}
+
+void Timer::setInit_t(unsigned init_t)
+{
+	_init_t = init_t;
 }

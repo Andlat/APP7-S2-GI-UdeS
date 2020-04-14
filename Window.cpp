@@ -1,19 +1,8 @@
 #include "Window.h"
-#include "Question.h"
-#include "Option.h"
-#include "Timer.h"
-#include "Parametre.h"
-
-#include <QGridLayout>
-#include <QVBoxLayout>
-#include <QPushButton>
-#include <QMenu>
-#include <QMenuBar>
-#include <QFile>
-#include <QTextStream>
-#include <QIcon>
 
 Window::Window(){
+	_param = Param();
+
 	auto mainLayout = new QGridLayout;
 	auto centralWidget = new QWidget(this);
 
@@ -36,8 +25,9 @@ Window::Window(){
 	timer = new Timer(this, 30);
 	mainLayout->addWidget(timer->start(), 3, 0, 1, 1, Qt::AlignCenter);
 
+
 	//Question
-	auto question = new Question("Quel programme universitaire est le meilleur ?", this);
+	question = new Question("Quel programme universitaire est le meilleur ?", this);
 	mainLayout->addWidget(question, 1, 1);
 
 	auto correctOption = new Option("A) Genie informatique", this);
@@ -50,7 +40,7 @@ Window::Window(){
 		);
 
 	question->setAnswer(correctOption);
-	question->ConnectOptions([this, question](Option* selected) {
+	question->ConnectOptions([this](Option* selected) {
 		
 		this->timer->stop();
 
@@ -59,7 +49,7 @@ Window::Window(){
 	});
 
 	//Layout des choix de reponse
-	auto choicesContainer = new QWidget;
+	choicesContainer = new QWidget;
 	auto choicesLayout = new QGridLayout;
 	choicesContainer->setLayout(choicesLayout);
 	mainLayout->addWidget(choicesContainer, 2,1);
@@ -153,14 +143,18 @@ Window::~Window(){
 void Window::quit()
 {
 	messageBox("Quitter la partie");
-	save();
+	if (_param.autoSave)
+	{
+		save();
+	}
+	
 	this->close();
 }
 
 void Window::save()
 {
 	messageBox("Votre score a ete sauvegarder dans score.txt");
-	QFile file("score.txt");
+	QFile file(_param.filename);
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		return;
 	QTextStream out(&file);
@@ -203,6 +197,24 @@ void Window::messageBox(QString s)
 
 void Window::parametre()
 {
-	Parametre param;
-	param.exec();
+	timer->stop();
+	//question->hide();
+	choicesContainer->hide();
+
+	Parametre parametre(_param);
+	connect(&parametre, SIGNAL(paramChanged(Param)), this, SLOT(updateParam(Param)));
+	parametre.exec();
+
+	choicesContainer->show();
+	//question->show();
+	timer->start();
+}
+
+void Window::updateParam(Param param)
+{
+	_param = param;
+	if (_param.timeQuestion != timer->init_t())
+	{
+		timer->setInit_t(_param.timeQuestion);
+	}
 }

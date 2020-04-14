@@ -2,89 +2,112 @@
 
 Parametre::Parametre()
 {
+	Param param;
+	buildDialog(param);
+}
+
+Parametre::Parametre(Param param)
+{
+	buildDialog(param);
+}
+
+void Parametre::buildDialog(Param param)
+{
+	_param = param;
 	auto mainLayout = new QVBoxLayout(this);
 
-	mainWidget = new QWidget(this);
-	auto form = new QFormLayout(mainWidget);
+	_mainWidget = new QWidget(this);
+	_form = new QFormLayout(_mainWidget);
 
-	mainWidget->setLayout(form);
+	_mainWidget->setLayout(_form);
 
-	mainLayout->addWidget(mainWidget);
+	mainLayout->addWidget(_mainWidget);
 	resize(800, 600);
 	setWindowTitle("Parametres");
 
-	difficulte = new QComboBox(mainWidget);
+	_difficulty = new QComboBox(_mainWidget);
 
-	difficulte->addItem("Facile", 0);
-	difficulte->addItem("Moyen", 1);
-	difficulte->addItem("Difficile", 2);
-	difficulte->addItem("Extreme", 3);
+	_difficulty->addItem("Facile", 0);
+	_difficulty->addItem("Moyen", 1);
+	_difficulty->addItem("Difficile", 2);
+	_difficulty->addItem("Extreme", 3);
+	_difficulty->setCurrentIndex(_param.difficulty);
 
-	form->addRow("Difficulte", difficulte);
+	_form->addRow("Difficulte", _difficulty);
 
-	timeQuestion = new QSpinBox(mainWidget);
-	timeQuestion->setValue(30);
-	timeQuestion->setMinimum(10);
-	timeQuestion->setMaximum(60);
+	_timeQuestion = new QSpinBox(_mainWidget);
+	_timeQuestion->setValue(_param.timeQuestion);
+	_timeQuestion->setMinimum(10);
+	_timeQuestion->setMaximum(60);
 
-	form->addRow("Temps pour repondre aux questions", timeQuestion);
-
-
-	autoSave = new QCheckBox(mainWidget);
-
-	form->addRow("Sauvegarde automatique", autoSave);
+	_form->addRow("Temps pour repondre aux questions", _timeQuestion);
 
 
+	_autoSave = new QCheckBox(_mainWidget);
+	_autoSave->setChecked(_param.autoSave);
 
-	auto line = new QWidget(mainWidget);
+	_form->addRow("Sauvegarde automatique", _autoSave);
+
+
+
+	auto line = new QWidget(_mainWidget);
 	auto lineLayout = new QHBoxLayout(line);
 
 	line->setLayout(lineLayout);
 
-	filename = new QLineEdit(mainWidget);
-	filename->setText(QDir::currentPath() + "/score.txt");
-	browseButton = new QPushButton(line);
-	browseButton->setText("Naviguer");
+	_filename = new QLineEdit(_mainWidget);
+	_filename->setText(_param.filename);
+	_browseButton = new QPushButton(line);
+	_browseButton->setText("Naviguer");
 
-	connect(browseButton, SIGNAL(clicked()), this, SLOT(browse()));
+	connect(_browseButton, SIGNAL(clicked()), this, SLOT(browse()));
 
-	lineLayout->addWidget(filename);
-	lineLayout->addWidget(browseButton);
+	lineLayout->addWidget(_filename);
+	lineLayout->addWidget(_browseButton);
 
-	form->addRow("Fichier de sauvegarde", line);
+	_form->addRow("Fichier de sauvegarde", line);
 
 	auto footerWidget = new QWidget(this);
 	auto footerLayout = new QHBoxLayout(footerWidget);
 
-	okButton = new QPushButton("Ok", footerWidget);
-	okButton->setMaximumWidth(150);
-	cancelButton = new QPushButton("Cancel", footerWidget);
-	cancelButton->setMaximumWidth(150);
-	applyButton = new QPushButton("Appliquer", footerWidget);
-	applyButton->setMaximumWidth(150);
+	_okButton = new QPushButton("Ok", footerWidget);
+	_okButton->setMaximumWidth(150);
+	_cancelButton = new QPushButton("Cancel", footerWidget);
+	_cancelButton->setMaximumWidth(150);
+	_applyButton = new QPushButton("Appliquer", footerWidget);
+	_applyButton->setMaximumWidth(150);
 
-	footerLayout->addWidget(okButton);
-	footerLayout->addWidget(cancelButton);
-	footerLayout->addWidget(applyButton);
+	footerLayout->addWidget(_okButton);
+	footerLayout->addWidget(_cancelButton);
+	footerLayout->addWidget(_applyButton);
 	footerLayout->setAlignment(Qt::AlignBottom | Qt::AlignRight);
 
-	connect(okButton, SIGNAL(clicked()), this, SLOT(ok()));
-	connect(cancelButton, SIGNAL(clicked()), this, SLOT(close()));
-	connect(applyButton, SIGNAL(clicked()), this, SLOT(apply()));
+	connect(_okButton, SIGNAL(clicked()), this, SLOT(ok()));
+	connect(_cancelButton, SIGNAL(clicked()), this, SLOT(close()));
+	connect(_applyButton, SIGNAL(clicked()), this, SLOT(apply()));
 
 
 	mainLayout->addWidget(footerWidget);
 
 }
 
+
+
 void Parametre::apply()
 {
-	QString message = "Difficulte choisie : " + difficulte->currentData().toString() + "\n";
-	message += "Temps de reponse : " + QString::number(timeQuestion->value()) + "\n";
-	message += "Sauvegarde automatique : " + (QString) (autoSave->checkState() == Qt::Checked ? "Oui" : "Non") + "\n";
-	message += "Fichier de sauvegarde : " + filename->text() + "\n";
+	//QString message = "Difficulte choisie : " + _difficulty->currentData().toString() + "\n";
+	//message += "Temps de reponse : " + QString::number(_timeQuestion->value()) + "\n";
+	//message += "Sauvegarde automatique : " + (QString) (_autoSave->checkState() == Qt::Checked ? "Oui" : "Non") + "\n";
+	//message += "Fichier de sauvegarde : " + _filename->text() + "\n";
+	//QMessageBox::information(this, "Parametres choisis", message, QMessageBox::Ok, QMessageBox::Ok);
 
-	QMessageBox::information(this, "Parametres choisis",  message, QMessageBox::Ok, QMessageBox::Ok);
+	_param.autoSave = _autoSave->checkState();
+	_param.difficulty = _difficulty->currentIndex();
+	_param.filename = _filename->text();
+	_param.timeQuestion = _timeQuestion->value();
+
+
+	emit paramChanged(_param);
 }
 
 void Parametre::ok()
@@ -95,5 +118,5 @@ void Parametre::ok()
 
 void Parametre::browse()
 {
-	filename->setText(QFileDialog::getSaveFileName(this, "Fichier de score", "score.txt", "*.txt"));
+	_filename->setText(QFileDialog::getSaveFileName(this, "Fichier de score", "score.txt", "*.txt"));
 }

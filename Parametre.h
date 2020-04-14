@@ -12,31 +12,53 @@
 #include <QVBoxLayout>
 #include <QFileDialog.h>
 #include <QSpinBox>
-#include <QDir>
 #include <QMessageBox>
 #include <QString>
 #include <QDialog>
+#include <QDir>
+
+struct Param {
+	int difficulty;
+	int timeQuestion;
+	QString filename;
+	bool autoSave;
+	Param() :
+		difficulty(0),
+		timeQuestion(30),
+		filename(QDir::currentPath() + "/score.txt"),
+		autoSave(false) {};
+	Param(int _difficulty, int _timeQuestion, QString _filename, bool _autoSave) :
+		difficulty(_difficulty),
+		timeQuestion(_timeQuestion),
+		filename(_filename),
+		autoSave(_autoSave)	{};
+};
 
 class Parametre : public QDialog {
 	Q_OBJECT
 
 public:
 	Parametre();
+	Parametre(Param param);
+signals:
+	void paramChanged(Param param);
 private slots:
 	void apply();
 	void ok();
 	void browse();
 private:
-	QComboBox* difficulte;
-	QWidget* mainWidget;
-	QCheckBox* autoSave;
-	QFormLayout* form;
-	QLineEdit* filename;
-	QSpinBox* timeQuestion;
-	QPushButton* browseButton;
-	QPushButton* applyButton;
-	QPushButton* okButton;
-	QPushButton* cancelButton;
+	void buildDialog(Param param);
+	QComboBox* _difficulty;
+	QWidget* _mainWidget;
+	QCheckBox* _autoSave;
+	QFormLayout* _form;
+	QLineEdit* _filename;
+	QSpinBox* _timeQuestion;
+	QPushButton* _browseButton;
+	QPushButton* _applyButton;
+	QPushButton* _okButton;
+	QPushButton* _cancelButton;
+	Param _param;
 };
 
 #endif
