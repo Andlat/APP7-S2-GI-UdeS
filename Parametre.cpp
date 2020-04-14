@@ -27,7 +27,7 @@ Parametre::Parametre()
 	timeQuestion->setMinimum(10);
 	timeQuestion->setMaximum(60);
 
-	form->addRow("Temps pour répondre aux questions", timeQuestion);
+	form->addRow("Temps pour repondre aux questions", timeQuestion);
 
 
 	autoSave = new QCheckBox(mainWidget);
