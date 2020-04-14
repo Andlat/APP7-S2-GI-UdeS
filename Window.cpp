@@ -4,6 +4,7 @@
 #include "Timer.h"
 
 #include <QGridLayout>
+#include <QVBoxLayout>
 #include <QPushButton>
 #include <QMenu>
 #include <QMenuBar>
@@ -75,19 +76,19 @@ Window::Window(){
 
 	//Timer
 	auto timer = new Timer(this,30);
-	mainLayout->addWidget(timer->start(), 3, 0);
+	mainLayout->addWidget(timer->start(), 3, 0,1,1,Qt::AlignCenter);
 
 	//Table des montants
 	payoutTable = new PayoutTable;
 	mainLayout->addWidget(payoutTable,1,2,2,1);
 
-
 	//Bouton temporaire pour changer le montant surligné
-	auto nextBtn = new QPushButton("Next", this);
+	auto nextBtn = new QPushButton("Continuer", this);
 	connect(nextBtn, &QPushButton::clicked, payoutTable, &PayoutTable::next);
 	mainLayout->addWidget(nextBtn,3,2);
 
-	//bouton pour choisir de partir
+
+	//bouton pour quitter la partie
 	auto stopGame = new QPushButton("Quitter", this);
 	connect(stopGame, &QPushButton::clicked, this, &Window::quit);
 	mainLayout->addWidget(stopGame, 3, 1);
@@ -105,28 +106,36 @@ Window::Window(){
 	menu = menuBar()->addMenu("Edition");
 	menu->addAction(help_ac);
 
+	//Lignes de vie
 	/* image pour le 50/50 , telephone, public, image de background */
-	
 	//50/50
+	auto lifelinesLayout = new QVBoxLayout;
+	auto lifelinesWidget = new QWidget;
+	lifelinesWidget->setLayout(lifelinesLayout);
+	mainLayout->addWidget(lifelinesWidget, 1,0);
+
+	
 	auto cinquante = new QPushButton(this);
 	connect(cinquante, &QPushButton::clicked, this, &Window::cinquante);
 	cinquante->setIcon(QIcon("cinquante"));
 	cinquante->setIconSize(QSize(50, 50));
-	mainLayout->addWidget(cinquante,2,0,Qt::AlignLeft);
+	lifelinesLayout->addWidget(cinquante);
 
 	//telephone
 	auto telephone = new QPushButton(this);
 	connect(telephone, &QPushButton::clicked, this, &Window::telephone);
 	telephone->setIcon(QIcon("telephone"));
 	telephone->setIconSize(QSize(50, 50));
-	mainLayout->addWidget(telephone, 1, 0, Qt::AlignLeft);
+	//mainLayout->addWidget(telephone, 1, 0, Qt::AlignLeft);
+	lifelinesLayout->addWidget(telephone);
 
 	//public
 	auto publics = new QPushButton(this);
 	connect(publics, &QPushButton::clicked, this, &Window::publics);
 	publics->setIcon(QIcon("public"));
 	publics->setIconSize(QSize(50, 50));
-	mainLayout->addWidget(publics, 0, 0, Qt::AlignLeft);
+	//mainLayout->addWidget(publics, 0, 0, Qt::AlignLeft);
+	lifelinesLayout->addWidget(publics);
 }
 
 Window::~Window(){
