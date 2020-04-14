@@ -11,7 +11,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QIcon>
-#include <QImage>
+
 
 
 Window::Window(){
@@ -23,7 +23,7 @@ Window::Window(){
 
 	setCentralWidget(centralWidget);
 	setMinimumSize(900, 600);
-
+	
 
 	//Titre
 	auto title = new QLabel("Qui veut gagner des millions ?", this);
