@@ -13,19 +13,16 @@
 #include <QTextStream>
 #include <QIcon>
 
-
-#include <iostream>
-
 Window::Window(){
 	auto mainLayout = new QGridLayout;
 	auto centralWidget = new QWidget(this);
-	//this->setStyleSheet("border:1px solid black"); /* TODO ceci est temporaire pour mieux voir le layout */
 
 	centralWidget->setLayout(mainLayout);
 
 	setCentralWidget(centralWidget);
 	setMinimumSize(900, 600);
-	
+	setWindowTitle("Qui veut gagner des millions ?");
+	setWindowIcon(QIcon("logo"));
 
 	//Titre
 	auto title = new QLabel("Qui veut gagner des millions ?", this);
