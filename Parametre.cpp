@@ -12,6 +12,7 @@ Parametre::Parametre()
 	mainLayout->addWidget(mainWidget);
 	resize(800, 600);
 	setWindowTitle("Parametres");
+	setWindowIcon(QIcon("logo"));
 
 	difficulte = new QComboBox(mainWidget);
 
