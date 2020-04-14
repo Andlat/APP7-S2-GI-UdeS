@@ -22,7 +22,7 @@ void Parametre::buildDialog(Param param)
 	_mainWidget->setLayout(_form);
 
 	mainLayout->addWidget(_mainWidget);
-	resize(800, 600);
+	resize(900, 350);
 	setWindowTitle("Parametres");
 	setWindowIcon(QIcon("logo"));
 
