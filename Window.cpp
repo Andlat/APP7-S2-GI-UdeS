@@ -10,6 +10,9 @@
 #include <QMenuBar>
 #include <QFile>
 #include <QTextStream>
+#include <QIcon>
+#include <QImage>
+
 
 Window::Window(){
 	auto mainLayout = new QGridLayout;
@@ -28,6 +31,9 @@ Window::Window(){
 	title->setStyleSheet("color: #4431C4; font-size: 50px; font-weight: bold;");
 
 	mainLayout->addWidget(title, 0,0, 1,0);
+	
+
+
 
 	//Question
 	auto question = new Question("Quel programme universitaire est le meilleur ?", this);
@@ -83,7 +89,7 @@ Window::Window(){
 	mainLayout->addWidget(nextBtn,3,2);
 
 	//bouton pour choisir de partir
-	auto stopGame = new QPushButton("parir", this);
+	auto stopGame = new QPushButton("Parir", this);
 	connect(stopGame, &QPushButton::clicked, this, &Window::quit);
 	mainLayout->addWidget(stopGame, 3, 1);
 	
@@ -99,6 +105,32 @@ Window::Window(){
 	menu->addAction(save_ac);
 	menu = menuBar()->addMenu("Edition");
 	menu->addAction(help_ac);
+
+	/* image pour le 50/50 , telephone, public, image de background */
+	
+	//50/50
+	auto cinquante = new QPushButton(this);
+	connect(cinquante, &QPushButton::clicked, this, &Window::cinquante);
+	cinquante->setIcon(QIcon("cinquante"));
+	cinquante->setIconSize(QSize(50, 50));
+	mainLayout->addWidget(cinquante,2,0,Qt::AlignLeft);
+
+	//telephone
+	auto telephone = new QPushButton(this);
+	connect(telephone, &QPushButton::clicked, this, &Window::telephone);
+	telephone->setIcon(QIcon("telephone"));
+	telephone->setIconSize(QSize(50, 50));
+	mainLayout->addWidget(telephone, 1, 0, Qt::AlignLeft);
+
+	//public
+	auto publics = new QPushButton(this);
+	connect(publics, &QPushButton::clicked, this, &Window::publics);
+	publics->setIcon(QIcon("public"));
+	publics->setIconSize(QSize(50, 50));
+	mainLayout->addWidget(publics, 0, 0, Qt::AlignLeft);
+
+
+	
 
 }
 
@@ -133,6 +165,21 @@ void Window::help()
 		"Le joker vous donne directement la bonne reponse "
 		"Bonne chance :) ");
 	messageBox(text);
+}
+
+void Window::cinquante()
+{
+	messageBox("50/50 selectionner");
+}
+
+void Window::telephone()
+{
+	messageBox("coup de telephone");
+}
+
+void Window::publics()
+{
+	messageBox("adie du public");
 }
 
 void Window::messageBox(QString s)

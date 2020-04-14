@@ -22,6 +22,9 @@ private slots:
 	void quit();
 	void save();
 	void help();
+	void cinquante();
+	void telephone();
+	void publics();
 
 private:
 	void messageBox(QString s);
