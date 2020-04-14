@@ -13,8 +13,9 @@ public:
 	~Timer();
 
 	Timer* start();
+	Timer* stop();
 
-	void reset();
+	Timer* reset();
 
 	void add(int t);
 	void operator+=(int t);

@@ -20,9 +20,19 @@ Timer * Timer::start()
 	return this;
 }
 
-void Timer::reset()
+Timer* Timer::stop()
 {
-	time_left = init_t;
+	this->looper->stop();
+	
+	return this;
+}
+
+Timer* Timer::reset()
+{
+	time_left = init_t+1;//+1s since the update removes 1s
+	this->update();
+
+	return this;
 }
 
 void Timer::add(int t)

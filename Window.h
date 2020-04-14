@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QMessageBox>
 
+#include "PayoutTable.h"
+#include "Timer.h"
+
 class Window: public QMainWindow
 {
 	Q_OBJECT
@@ -31,6 +34,10 @@ private:
 	void messageBox(QString s);
 	QMessageBox message;
 
+	PayoutTable* payoutTable;
+	Timer* timer;
+
+	bool hasTrigerredCorrectAnswer = false;
 };
 
 
