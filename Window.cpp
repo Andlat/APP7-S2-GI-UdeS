@@ -127,10 +127,6 @@ Window::Window(){
 	publics->setIcon(QIcon("public"));
 	publics->setIconSize(QSize(50, 50));
 	mainLayout->addWidget(publics, 0, 0, Qt::AlignLeft);
-
-
-	
-
 }
 
 Window::~Window(){
