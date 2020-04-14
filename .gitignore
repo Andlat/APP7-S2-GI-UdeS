@@ -351,3 +351,6 @@ MigrationBackup/
 .qmake.stash
 APP7.vcxproj
 APP7.vcxproj.filters
+APP7.sln
+score.text
+
