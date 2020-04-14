@@ -1,5 +1,4 @@
 #include "Window.h"
-#include "PayoutTable.h"
 #include "Question.h"
 #include "Option.h"
 #include "Timer.h"
@@ -79,7 +78,7 @@ Window::Window(){
 	mainLayout->addWidget(timer->start(), 3, 0);
 
 	//Table des montants
-	auto payoutTable = new PayoutTable;
+	payoutTable = new PayoutTable;
 	mainLayout->addWidget(payoutTable,1,2,2,1);
 
 
@@ -89,7 +88,7 @@ Window::Window(){
 	mainLayout->addWidget(nextBtn,3,2);
 
 	//bouton pour choisir de partir
-	auto stopGame = new QPushButton("Parir", this);
+	auto stopGame = new QPushButton("Quitter", this);
 	connect(stopGame, &QPushButton::clicked, this, &Window::quit);
 	mainLayout->addWidget(stopGame, 3, 1);
 	
@@ -147,11 +146,11 @@ void Window::quit()
 void Window::save()
 {
 	messageBox("votre score a ete sauvegarder dans score.txt");
-	QFile file("score.text");
+	QFile file("score.txt");
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		return;
 	QTextStream out(&file);
-	out << "votre score est de : " << endl;
+	out << "votre score est de : " << this->payoutTable->get() << '$' << endl;
 }
 
 void Window::help()
