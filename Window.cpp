@@ -159,7 +159,7 @@ void Window::quit()
 
 void Window::save()
 {
-	messageBox("Votre score a ete sauvegarder dans score.txt");
+	messageBox("Votre score a ete sauvegarde dans score.txt");
 	QFile file("score.txt");
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 		return;
@@ -173,7 +173,7 @@ void Window::help()
 	text = ("Ce jeu consiste a remporter de l'argent a chaque fois que vous trouvez la bonne reponse aux questions. Pour vous aidez,"
 		"vous disposez de 4 outils soit : le 50/50; le telephone; l'avis du public et le joker. Leur fonctionnement sont expliques ci-dessous"
 		"Le 50/50 permet d'eliminer 2 reponses sur les 4. La reponse de la question se trouve dans l'une de ces 2 reponses"
-		"Le telephone vous donne la possibilit� d'appeler un ami qui pourra vous aider a repondre � la question"
+		"Le telephone vous donne la possibilite d'appeler un ami qui pourra vous aider a repondre a la question"
 		"L'aide du public vous permet de consulter le public et d'avoir leur opinion sur reponse"
 		"Le joker vous donne directement la bonne reponse "
 		"Bonne chance :) ");
@@ -182,7 +182,7 @@ void Window::help()
 
 void Window::cinquante()
 {
-	messageBox("50/50 selectionn�");
+	messageBox("50/50 selectionne");
 }
 
 void Window::telephone()
