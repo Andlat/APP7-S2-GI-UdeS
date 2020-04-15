@@ -26,7 +26,7 @@ struct Param {
 		difficulty(0),
 		timeQuestion(30),
 		filename(QDir::currentPath() + "/score.txt"),
-		autoSave(false) {};
+		autoSave(true) {};
 	Param(int _difficulty, int _timeQuestion, QString _filename, bool _autoSave) :
 		difficulty(_difficulty),
 		timeQuestion(_timeQuestion),
